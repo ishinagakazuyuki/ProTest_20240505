@@ -44,40 +44,41 @@
 ## 環境構築
 
 ①クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
-　◇初期設定
+　◇初期設定<br>
    git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
-　  cd Rese_Develop<br>
-　  docker-compose up -d --build<br>
-　  docker-compose exec php bash<br>
-　  apt-get update<br>
-　  apt-get install libgd-dev<br>
-　  docker-php-ext-install gd<br>
-　  composer install<br>
-　  cp .env.example .env<br>
- ◇imagickインストール
-　  apt-get update<br>
-　  apt-get install imagemagick libmagickwand-dev<br>
-　  pecl download imagick<br>
-　  tar -xvzf imagick-3.7.0.tgz<br>
-　  cd imagick-3.7.0<br>
-　  phpize<br>
-　  ./configure<br>
-　  make<br>
-　  make install<br>
-　  echo extension=imagick >> /usr/local/etc/php/php.ini<br>
-　  exit<br>
-<br>
-◇.envファイルを以下の通りに修正してください。<br>
- ★修正<br>
-APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
-<br>
-DB_HOST=mysql<br>
-DB_DATABASE=laravel_db<br>
-DB_USERNAME=laravel_user<br>
-DB_PASSWORD=laravel_pass<br>
-<br>
-MAIL_FROM_ADDRESS=hello@example.com<br>
-<br>
-★追加<br>
-STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
-STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>
+   cd Rese_Develop<br>
+   docker-compose up -d --build<br>
+   docker-compose exec php bash<br>
+   apt-get update<br>
+   apt-get install libgd-dev<br>
+   docker-php-ext-install gd<br>
+   composer install<br>
+   cp .env.example .env<br>
+   <br>
+ ◇imagickインストール<br>
+   apt-get update<br>
+   apt-get install imagemagick libmagickwand-dev<br>
+   pecl download imagick<br>
+   tar -xvzf imagick-3.7.0.tgz<br>
+   cd imagick-3.7.0<br>
+   phpize<br>
+   ./configure<br>
+   make<br>
+   make install<br>
+   echo extension=imagick >> /usr/local/etc/php/php.ini<br>
+   exit<br>
+   <br>
+②.envファイルを以下の通りに修正してください。<br>
+　◇修正<br>
+   APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
+   <br>
+   DB_HOST=mysql<br>
+   DB_DATABASE=laravel_db<br>
+   DB_USERNAME=laravel_user<br>
+   DB_PASSWORD=laravel_pass<br>
+   <br>
+   MAIL_FROM_ADDRESS=hello@example.com<br>
+   <br>
+◇追加<br>
+　　STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
+  STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>

@@ -43,29 +43,29 @@
 
 ## 環境構築
 
-- クローン先のディレクトリに移動後以下のコマンドを実行してください。
-git clone git@github.com:ishinagakazuyuki/Rese_Develop.git
-cd Rese_Develop
-docker-compose up -d --build
-docker-compose exec php bash
-apt-get update
-apt-get install libgd-dev
-docker-php-ext-install gd
-composer install
-cp .env.example .env
-exit
-
-- .envファイルを以下の通りに修正してください。
- ★修正
-APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=
-
-DB_HOST=mysql
-DB_DATABASE=laravel_db
-DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
-
-MAIL_FROM_ADDRESS=hello@example.com
-
-★追加
-STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"
-STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" 
+- クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
+git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
+cd Rese_Develop<br>
+docker-compose up -d --build<br>
+docker-compose exec php bash<br>
+apt-get update<br>
+apt-get install libgd-dev<br>
+docker-php-ext-install gd<br>
+composer install<br>
+cp .env.example .env<br>
+exit<br>
+<br>
+- .envファイルを以下の通りに修正してください。<br>
+ ★修正<br>
+APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
+<br>
+DB_HOST=mysql<br>
+DB_DATABASE=laravel_db<br>
+DB_USERNAME=laravel_user<br>
+DB_PASSWORD=laravel_pass<br>
+<br>
+MAIL_FROM_ADDRESS=hello@example.com<br>
+<br>
+★追加<br>
+STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
+STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>

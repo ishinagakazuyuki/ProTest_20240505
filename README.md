@@ -43,9 +43,29 @@
 
 ## 環境構築
 
-- Laravel Framework 8.83.27
+- クローン先のディレクトリに移動後以下のコマンドを実行してください。
+git clone git@github.com:ishinagakazuyuki/Rese_Develop.git
+cd Rese_Develop
+docker-compose up -d --build
+docker-compose exec php bash
+apt-get update
+apt-get install libgd-dev
+docker-php-ext-install gd
+composer install
+cp .env.example .env
+exit
 
+- .envファイルを以下の通りに修正してください。
+ ★修正
+APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=
 
-# Rese_Develop
+DB_HOST=mysql
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=laravel_pass
 
+MAIL_FROM_ADDRESS=hello@example.com
 
+★追加
+STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"
+STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" 

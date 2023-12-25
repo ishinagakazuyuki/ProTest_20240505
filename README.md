@@ -44,7 +44,7 @@
 ## 環境構築
 
 ①クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
-　◇初期設定<br>
+◇初期設定<br>
    git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
    cd Rese_Develop<br>
    docker-compose up -d --build<br>
@@ -55,7 +55,7 @@
    composer install<br>
    cp .env.example .env<br>
    <br>
- ◇imagickインストール<br>
+◇imagickインストール<br>
    apt-get update<br>
    apt-get install imagemagick libmagickwand-dev<br>
    pecl download imagick<br>
@@ -69,7 +69,7 @@
    exit<br>
    <br>
 ②.envファイルを以下の通りに修正してください。<br>
-　◇修正<br>
+◇修正<br>
    APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
    <br>
    DB_HOST=mysql<br>

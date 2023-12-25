@@ -1,8 +1,8 @@
-# 勤怠管理システム
+# Rese（リーズ）
 
-- ある企業の勤怠管理システム。
+- ある企業のグループ会社の飲食店予約サービス。
 
-![toppage](https://github.com/ishinagakazuyuki/Atte_Develop/assets/135584828/42c76a33-f1b4-4675-b1d0-43b0490c6faa)
+![toppage](https://github.com/ishinagakazuyuki/Rese_Develop/assets/135584828/bed870d9-50dc-4c52-81ed-94b2d7905e70)
 
 ## 作成した目的
 

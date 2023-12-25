@@ -1,0 +1,235 @@
+.shopowner_main {
+    display: flex;
+}
+
+.shop_content {
+    width: 60%;
+    padding-left: 5vw;
+}
+
+.shop_title {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.shop_title-back {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 4vh;
+    height: 4vh;
+    box-shadow: 5px 5px 5px DarkGray;
+    margin: 8px 20px 0 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.shop_title-name {
+    font-weight: bold;
+    font-size: 35px;
+    border: none;
+    background-color: WhiteSmoke;
+}
+
+.shop_img {
+    width: 90%;
+    height: 43vh;
+    margin-bottom: 30px;
+}
+
+.shop_tag {
+    font-size: 17px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.shop_tag-item {
+    border: none;
+    background-color: WhiteSmoke;
+    width: 25%;
+}
+
+.shop_overview {
+    font-size: 17px;
+}
+
+.shop_overview-item {
+    width: 90%;
+    height: 12vh;
+    white-space: normal;
+    border: none;
+    background-color: WhiteSmoke;
+}
+
+.mypage_reserve {
+    width: 40%;
+    margin-right: 80px;
+    margin-left: 50px;
+}
+
+.mypage_reserve-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.mypage_reserve-detail {
+    width: 100%;
+}
+
+.mypage_reserve-detail-item {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px DarkGray;
+    width: 100%;
+    height: 290px;
+    margin-bottom: 20px;
+}
+
+.mypage_reserve-detail-table1 {
+    width: 100%;
+    margin: 30px 0 0 30px;
+    color: white;
+    font-size: 18px;
+}
+
+.mypage_reserve-item-name1 {
+    width: 15%;
+    padding-bottom: 20px;
+}
+
+.mypage_reserve_img {
+    width: 40px;
+    background-color: white;
+    border-radius: 50%;
+    color: #007bff;
+}
+
+.mypage_reserve-item-name2 {
+    width: 65%;
+    padding-bottom: 20px;
+}
+
+.mypage_reserve-item-name3 {
+    padding-bottom: 30px;
+}
+
+.mypage_reserve-item-button {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border: 2px solid white;
+    border-radius: 50%;
+    background: #007bff;
+}
+
+.mypage_reserve-item-button::before,
+.mypage_reserve-item-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 15px;
+    background: white;
+}
+
+.mypage_reserve-item-button::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mypage_reserve-item-button::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mypage_reserve-detail-table2 {
+    width: 90%;
+    margin-left: 30px;
+    color: white;
+    font-size: 18px;
+}
+
+.mypage_reserve-item1 {
+    width: 25%;
+    padding-bottom: 10px;
+}
+
+.mypage_reserve-item2 {
+    width: 70%;
+    padding-bottom: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+}
+
+.mypage_reserve-button {
+    width: 100%;
+    position: relative;
+    top: 3px;
+    height: 40px;
+    background-color: blue;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+.mypage_reserve-submit {
+    background-color: blue;
+    border: 1px solid blue;
+    border-radius: 0 0 10px 10px;
+    color: white;
+    font-size: 15px;
+    padding-top: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .shop_title-name {
+        font-size: 25px;
+    }
+
+    .shop_img {
+        height: 35vh;
+    }
+
+    .shop_tag {
+        font-size: 14px;
+    }
+
+    .shop_overview {
+        font-size: 14px;
+    }
+
+    .mypage_reserve {
+        width: 50%;
+        margin-right: 20px;
+        margin-left: 40px;
+    }
+
+    .mypage_reserve-title {
+        font-size: 25px;
+    }
+
+    .mypage_reserve-detail-item {
+        height: 270px;
+    }
+
+    .mypage_reserve-detail-table1 {
+        font-size: 15px;
+    }
+
+    .mypage_reserve_img {
+        width: 30px;
+    }
+
+    .mypage_reserve-detail-table2 {
+        font-size: 15px;
+    }
+
+    .mypage_reserve-button {
+        top: 13px;
+    }
+}

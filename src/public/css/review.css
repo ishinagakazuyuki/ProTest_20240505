@@ -1,0 +1,53 @@
+.main {
+    width: 100%;
+}
+
+.review-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.review-main {
+    margin: 30px 50px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.review-form_select {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.review-form_label {
+    margin-right: 20px;
+}
+
+.review-form_textarea {
+    width: 70%;
+    height: 20vh;
+}
+
+.review-form__button {
+    text-align: center;
+    margin: 30px 30px 0 20px;
+}
+
+.review-form__button-submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .review-title {
+        font-size: 30px;
+    }
+
+    .review-main {
+        font-size: 20px;
+    }
+}

@@ -43,19 +43,31 @@
 
 ## 環境構築
 
-- クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
-git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
-cd Rese_Develop<br>
-docker-compose up -d --build<br>
-docker-compose exec php bash<br>
-apt-get update<br>
-apt-get install libgd-dev<br>
-docker-php-ext-install gd<br>
-composer install<br>
-cp .env.example .env<br>
-exit<br>
+①クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
+　◇初期設定
+   git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
+　  cd Rese_Develop<br>
+　  docker-compose up -d --build<br>
+　  docker-compose exec php bash<br>
+　  apt-get update<br>
+　  apt-get install libgd-dev<br>
+　  docker-php-ext-install gd<br>
+　  composer install<br>
+　  cp .env.example .env<br>
+ ◇imagickインストール
+　  apt-get update<br>
+　  apt-get install imagemagick libmagickwand-dev<br>
+　  pecl download imagick<br>
+　  tar -xvzf imagick-3.7.0.tgz<br>
+　  cd imagick-3.7.0<br>
+　  phpize<br>
+　  ./configure<br>
+　  make<br>
+　  make install<br>
+　  echo extension=imagick >> /usr/local/etc/php/php.ini<br>
+　  exit<br>
 <br>
-- .envファイルを以下の通りに修正してください。<br>
+◇.envファイルを以下の通りに修正してください。<br>
  ★修正<br>
 APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
 <br>

@@ -12,26 +12,33 @@
 
 - 会員登録
 - ログイン・ログアウト
-- ユーザー認証
-- 勤務開始・終了の打刻
-- 休憩開始・終了の打刻
-- 日付別勤怠情報取得
-- ユーザー一覧取得
-- ユーザーごとの勤怠表取得
+- ユーザー認証メール送信
+- 検索機能（都道府県・ジャンル・店舗名）
+- お気に入り設定・削除機能
+- 予約設定・変更・削除機能
+- ユーザーごとのお気に入り・予約情報取得
+- ユーザーによる店舗評価機能
+- stripeによる決済機能
+- QRコードによる予約情報の照合機能
+- リマインダー送信（午前9:00にメール自動送信）
+- 店舗代表者用ページ（店舗情報設定・修正、予約情報メール送信）
+- 管理者用ページ（店舗代表者登録）
 
 ## 使用技術(実行環境)
 
 - Laravel Framework 8.83.27
-- PHP 7.4.9
+- PHP 7.4.9 (cli) (built: Sep  1 2020 02:33:08) ( NTS )
 - MySQL Ver 8.0.26 for Linux on x86_64
 - nginx 1.21.1
+- phpMyAdmin　5.2.1
+- mailhog
 
 ## テーブル設計
 
-![tables drawio](https://github.com/ishinagakazuyuki/Atte_Develop/assets/135584828/4a4f9ab6-7301-4849-bfb1-e4e4d0da6ab1)
+![table drawio](https://github.com/ishinagakazuyuki/Rese_Develop/assets/135584828/2ee02bf9-5361-4712-b000-3667902d1ddd)
 
 ## ER 図
 
-![ER drawio](https://github.com/ishinagakazuyuki/Atte_Develop/assets/135584828/52dc069c-14d7-4545-b93d-33d96505a61d)
+![ER drawio](https://github.com/ishinagakazuyuki/Rese_Develop/assets/135584828/ae80e449-50c2-4daf-b319-1c11b70c60f8)
 
 # Rese_Develop

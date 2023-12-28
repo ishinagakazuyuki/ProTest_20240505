@@ -83,10 +83,10 @@
    STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
    STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>
    <br>
-③会員登録をしてください。
+③会員登録をしてください。<br>
 ◇ダミーデータの登録<br>
    docker-compose exec php bash<br>
    php artisan db:seed<br>
 ◇会員登録<br>
-   http://localhost/registerにアクセスして、必要事項を入力し登録する。<br>
+   http://localhost/register にアクセスして、必要事項を入力し登録する。<br>
    会員認証メールが送信されるので、http://localhost:8025/# にアクセスして認証する。<br>

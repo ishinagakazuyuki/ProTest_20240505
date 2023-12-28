@@ -87,6 +87,8 @@
 ◇ダミーデータの登録<br>
    docker-compose exec php bash<br>
    php artisan db:seed<br>
+   exit<br>
+   <br>
 ◇会員登録<br>
    http://localhost/register にアクセスして、必要事項を入力し登録する。<br>
    会員認証メールが送信されるので、http://localhost:8025/# にアクセスして認証する。<br>

@@ -68,6 +68,9 @@
    echo extension=imagick >> /usr/local/etc/php/php.ini<br>
    exit<br>
    <br>
+◇ダミーデータの登録<br>
+   php artisan db:seed<br>
+   <br>
 ②.envファイルを以下の通りに修正してください。<br>
 ◇修正<br>
    APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>

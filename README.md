@@ -68,9 +68,6 @@
    echo extension=imagick >> /usr/local/etc/php/php.ini<br>
    exit<br>
    <br>
-◇ダミーデータの登録<br>
-   php artisan db:seed<br>
-   <br>
 ②.envファイルを以下の通りに修正してください。<br>
 ◇修正<br>
    APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
@@ -85,3 +82,11 @@
 ◇追加<br>
    STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
    STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>
+   <br>
+③会員登録をしてください。
+◇ダミーデータの登録<br>
+   docker-compose exec php bash<br>
+   php artisan db:seed<br>
+◇会員登録
+   http://localhost/registerにアクセスして、必要事項を入力し登録する。<br>
+   会員認証メールが送信されるので、http://localhost:8025/# にアクセスして認証する。<br>

@@ -21,8 +21,10 @@ class AuthController extends Controller
             $favorite = 1;
         }else{
             $favorite = 2;
-            $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                ->orderBy('shops.id', 'asc')->get();
+            $favorite_check = favorite::where('user_id','=',$user_id)->first();
+            if(!empty($favorite_check)){
+                $shop = shop::join('favorites','shops.id','favorites.shops_id')->where('user_id','=',$user_id)->get();
+            }
         }
         $area = "";
         $genre = "";

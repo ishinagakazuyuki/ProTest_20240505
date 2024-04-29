@@ -1,7 +1,5 @@
 @extends('layouts.app')
-<?php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
-?>
+
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -136,20 +134,4 @@
         </div>
     </div>
 </div>
-    <script>
-        var downloadBtn = document.getElementById('download-btn');//htmlのdownload-btnの要素を格納
-        var qrcodeImg = document.getElementById('qrcode');        //htmlのqrcode
-
-        //下記一行はdownload_btnをクリックしたときの動作を記載しますよという意味
-        downloadBtn.addEventListener('click', function() {
-            var downloadLink = document.createElement('a');//ハイパーリンクを作成宣言(aタグ)
-            downloadLink.href = qrcodeImg.src;//qrcode->qrcodeImgのsrcの部分のリンクを格納してる
-            downloadLink.download = 'qrcode.png';//download時のファイル名を記載
-
-            // ダウンロードの確認ダイアログを表示する
-            if (confirm('二次元コードをダウンロードしていいですか?')) {
-                downloadLink.click();//実行するという意味のコード
-            }
-        });
-    </script>
 @endsection

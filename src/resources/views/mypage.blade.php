@@ -24,11 +24,6 @@
         @if(!empty($reserve))
         @foreach ($reserve as $reserves)
             <div class="mypage_reserve-detail-item">
-                <?php
-                // dd($users['name']);
-                    $url = 'http://localhost/check/'.$reserves['id'].'?id='.$reserves['id'];
-                    $qr_image = QrCode::size(400)->format('png')->generate($url);
-                ?>
                 <form action="?" method="?">
                 @csrf
                 <table class="mypage_reserve-detail-table1">
@@ -52,7 +47,6 @@
                     <tr>
                         <td class="mypage_reserve-item1">Shop</td>
                         <td class="mypage_reserve-item2"><span name="name">{{ $reserves['name'] }}</span></td>
-                        <td rowspan="4"><img class="mypage_reserve-qr" id="qrcode" src="data:image/png;base64, {!! base64_encode($qr_image) !!}"></td>
                     </tr>
                     <tr>
                         <td class="mypage_reserve-item1">Date</td>

@@ -78,8 +78,8 @@
         'id' => $shops['id'],
         'user_id' => 'no',
         'name' => $shops['name'],
-        'area'=> $shops['area'],
-        'genre'=> $shops['genre'],
+        'area'=> $shops['areas_id'],
+        'genre'=> $shops['genres_id'],
         'image' => $shops['image'],
         'fav_flg'=> 'LightGrey',
     ];

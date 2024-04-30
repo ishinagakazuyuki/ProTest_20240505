@@ -102,16 +102,10 @@ class ShopController extends Controller
 
     public function detail(Request $request){
         $user_id = Auth::user();
-        if(empty($user_id)){
-            $favorite = 1;
-        }else{
-            $favorite = 2;
-            $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                ->orderBy('shops.id', 'asc')->get();
-        }
-        $shop = shop::where('id','=',$request['id'])->get();
+        $shop = shop::join('areas','shops.areas_id','areas.id')->join('genres','shops.genres_id','genres.id')
+                ->where('shops.id','=',$request['id'])->first();
         $count = -1;
-        return view('detail', compact('shop','favorite','count'));
+        return view('detail', compact('shop','count'));
     }
 
     public function reserve(ReserveRequest $request){

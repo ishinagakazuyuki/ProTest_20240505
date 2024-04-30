@@ -8,17 +8,17 @@
 <div class="detail__content">
     <div class='detail__title'>
         <button class='detail_title-back' type="button" onClick="history.go({{ $count }})"><</button>
-        <span class="detail_title-name">{{ $shop[0]['name'] }}</span>
+        <span class="detail_title-name">{{ $shop['name'] }}</span>
     </div>
     <div>
-        <img class="detail__img" src="../storage/images/{{ $shop[0]['name'] }}.jpg" alt="" />
+        <img class="detail__img" src="../storage/images/{{ $shop['image'] }}" alt="" />
     </div>
     <div class="detail__tag">
-        <span>#{{ $shop[0]['area'] }}</span>
-        <span>#{{ $shop[0]['genre'] }}</span>
+        <span>#{{ $shop['area'] }}</span>
+        <span>#{{ $shop['genre'] }}</span>
     </div>
     <div class="detail__overview">
-        <span>#{{ $shop[0]['overview'] }}</span>
+        <span>#{{ $shop['overview'] }}</span>
     </div>
 </div>
 
@@ -27,7 +27,7 @@
         <span>予約</span>
     </div>
     <div>
-        <form id="reserve" action="{{ route('detail',['shop_id' => $shop[0]['id'] ]) }}" method="post">
+        <form id="reserve" action="{{ route('detail',['shop_id' => $shop['id'] ]) }}" method="post">
             @csrf
             <div class="reserve_form-item">
                 <input id="reserve_date" name="date" class="reserve_date" type="date" value="<?php echo date('Y-m-j');?>">
@@ -76,7 +76,7 @@
                 <table>
                     <tr>
                         <td class="reserve_detail-item">Shop</td>
-                        <td><span>{{ $shop[0]['name'] }}</span></td>
+                        <td><span>{{ $shop['name'] }}</span></td>
                     </tr>
                     <tr>
                         <td class="reserve_detail-item">Date</td>
@@ -93,7 +93,7 @@
             </div>
             <div class="reserve_button">
                 <button class="reserve_button-submit" type="submit">予約する</button>
-                <input type="hidden" name="id" value="{{ $shop[0]['id'] }}" />
+                <input type="hidden" name="id" value="{{ $shop['id'] }}" />
             </div>
         </form>
     </div>

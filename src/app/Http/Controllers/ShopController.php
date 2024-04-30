@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Models\User;
-use App\Models\shop;
-use App\Models\favorite;
-use App\Models\reservation;
-use App\Models\owner;
-use App\Models\review;
+use App\Models\Shop;
+use App\Models\Favorite;
+use App\Models\Reservation;
+use App\Models\Owner;
+use App\Models\Review;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use App\Http\Requests\ReserveRequest;
@@ -22,21 +22,6 @@ use App\Http\Requests\CreateRequest;
 
 class ShopController extends Controller
 {
-    public function lists(Request $request){
-        $shop = shop::get();
-        $user_id = Auth::user();
-        if(empty($user_id)){
-            $favorite = 1;
-        }else{
-            $favorite = 2;
-            $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                ->orderBy('shops.id', 'asc')->get();
-        }
-        $area = "";
-        $genre = "";
-        return view('list', compact('shop','favorite','area','genre'));
-    }
-
     public function thanks(Request $request){
         return view('thanks');
     }

@@ -16,10 +16,7 @@ use App\Http\Controllers\ShopController;
 */
 
 Auth::routes(['verify' => true]);
-Route::middleware('verified')->group(function () {
-    Route::get('/index', [AuthController::class, 'list']);
-});
-Route::get('/', [ShopController::class, 'lists']);
+Route::get('/', [AuthController::class, 'index']);
 Route::get('/thanks', [ShopController::class, 'thanks']);
 Route::post('/favo_change', [ShopController::class, 'favo_change']);
 Route::get('/search', [ShopController::class, 'search']);

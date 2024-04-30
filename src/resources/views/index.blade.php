@@ -72,7 +72,7 @@
     <?php
     $fav_access = '';
     ?>
-    @if ($favorite === 1)
+    @if (empty($user_id))
     <?php
     $shops = [
         'id' => $shops['id'],
@@ -80,6 +80,7 @@
         'name' => $shops['name'],
         'area'=> $shops['area'],
         'genre'=> $shops['genre'],
+        'image' => $shops['image'],
         'fav_flg'=> 'LightGrey',
     ];
     $fav_access = 'disabled';
@@ -87,7 +88,7 @@
     @endif
     <div class="list__item">
         <div>
-            <img class="list__img" src="storage/images/{{ $shops['name'] }}.jpg" alt="" />
+            <img class="list__img" src="storage/images/{{ $shops['image'] }}" alt="" />
         </div>
         <div class="list__content">
             <span class="list_name">{{ $shops['name'] }}</span>

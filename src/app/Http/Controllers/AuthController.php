@@ -7,27 +7,18 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
-use App\Models\shop;
-use App\Models\favorite;
-use App\Models\reservation;
+use App\Models\Shop;
+use App\Models\Area;
+use App\Models\genre;
+use App\Models\Favorite;
 
 class AuthController extends Controller
 {
-    public function list(Request $request){
+    public function index(Request $request){
         $user_id = Auth::user();
-        $shop = shop::get();
-        $shop_id = shop::select('id')->get();
-        if(empty($user_id)){
-            $favorite = 1;
-        }else{
-            $favorite = 2;
-            $favorite_check = favorite::where('user_id','=',$user_id['id'])->first();
-            if(!empty($favorite_check)){
-                $shop = shop::join('favorites','shops.id','favorites.shops_id')->where('user_id','=',$user_id['id'])->get();
-            }
-        }
+        $shop = shop::join('areas','shops.areas_id','areas.id')->join('genres','shops.genres_id','genres.id')->get();
         $area = "";
         $genre = "";
-        return view('list', compact('shop','favorite','area','genre'));
+        return view('index', compact('user_id','shop','area','genre'));
     }
 }

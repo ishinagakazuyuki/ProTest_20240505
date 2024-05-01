@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ManageController;
 
@@ -28,10 +29,6 @@ Route::get('/detail/{shop_id}', [ShopController::class, 'detail'])->name('detail
 Route::get('/done', [ShopController::class, 'done']);
 Route::get('/mypage', [ShopController::class, 'mypage']);
 
-
-
-
-
 Route::post('/favo_change', [FavoriteController::class, 'favo_change']);
 Route::post('/favo_change_mypage', [FavoriteController::class, 'favo_change_mypage']);
 
@@ -41,8 +38,8 @@ Route::post('/reserve_delete', [ReserveController::class, 'reserve_delete']);
 Route::get('/reserve_change', [ReserveController::class, 'reserve_change']);
 Route::post('/reserve_change', [ReserveController::class, 'reserve_change']);
 
-Route::get('/review', [ShopController::class, 'review']);
-Route::post('/review', [ShopController::class, 'reviews']);
+Route::get('/review', [ReviewController::class, 'review']);
+Route::post('/review', [ReviewController::class, 'reviews']);
 
 Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');

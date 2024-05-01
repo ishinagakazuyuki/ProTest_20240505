@@ -41,4 +41,8 @@ class AuthController extends Controller
         $fav_access = '';
         return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
     }
+
+    public function thanks(Request $request){
+        return view('thanks');
+    }
 }

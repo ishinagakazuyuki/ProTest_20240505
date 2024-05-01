@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,29 +21,39 @@ use App\Http\Controllers\ShopController;
 
 Auth::routes(['verify' => true]);
 Route::get('/', [AuthController::class, 'index']);
-Route::get('/thanks', [ShopController::class, 'thanks']);
-Route::post('/favo_change', [ShopController::class, 'favo_change']);
+Route::get('/thanks', [AuthController::class, 'thanks']);
+
 Route::get('/search', [ShopController::class, 'search']);
 Route::get('/detail/{shop_id}', [ShopController::class, 'detail'])->name('detail');
-Route::post('/detail/{shop_id}', [ShopController::class, 'reserve'])->name('detail');
 Route::get('/done', [ShopController::class, 'done']);
 Route::get('/mypage', [ShopController::class, 'mypage']);
-Route::get('/reserve_delete', [ShopController::class, 'reserve_delete']);
-Route::post('/reserve_delete', [ShopController::class, 'reserve_delete']);
-Route::post('/favo_change_mypage', [ShopController::class, 'favo_change_mypage']);
-Route::get('/reserve_change', [ShopController::class, 'reserve_change']);
-Route::post('/reserve_change', [ShopController::class, 'reserve_change']);
-Route::prefix('payment')->name('payment.')->group(function () {
-    Route::get('/payment', [ShopController::class, 'payment'])->name('payment');
-    Route::post('/payments', [ShopController::class, 'payments'])->name('payments');
-});
-Route::get('/manage', [ShopController::class, 'manage'])->middleware('manage.auth');
-Route::post('/create', [ShopController::class, 'create'])->middleware('manage.auth');
-Route::get('/owner', [ShopController::class, 'owner'])->middleware('owner.auth');
-Route::get('/send_mail', [ShopController::class, 'send_mail'])->middleware('owner.auth');
-Route::post('/send_mail', [ShopController::class, 'send_mail'])->middleware('owner.auth');
-Route::get('/update', [ShopController::class, 'update'])->middleware('owner.auth');
-Route::post('/update', [ShopController::class, 'update'])->middleware('owner.auth');
+
+
+
+
+
+Route::post('/favo_change', [FavoriteController::class, 'favo_change']);
+Route::post('/favo_change_mypage', [FavoriteController::class, 'favo_change_mypage']);
+
+Route::post('/detail/{shop_id}', [ReserveController::class, 'reserve'])->name('detail');
+Route::get('/reserve_delete', [ReserveController::class, 'reserve_delete']);
+Route::post('/reserve_delete', [ReserveController::class, 'reserve_delete']);
+Route::get('/reserve_change', [ReserveController::class, 'reserve_change']);
+Route::post('/reserve_change', [ReserveController::class, 'reserve_change']);
+
 Route::get('/review', [ShopController::class, 'review']);
 Route::post('/review', [ShopController::class, 'reviews']);
-Route::get('/check/{reserve_id}', [ShopController::class, 'check'])->name('check');
+
+Route::prefix('payment')->name('payment.')->group(function () {
+    Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+    Route::post('/payments', [PaymentController::class, 'payments'])->name('payments');
+});
+
+Route::get('/manage', [ManageController::class, 'manage'])->middleware('manage.auth');
+Route::post('/create', [ManageController::class, 'create'])->middleware('manage.auth');
+Route::get('/owner', [ManageController::class, 'owner'])->middleware('owner.auth');
+Route::get('/send_mail', [ManageController::class, 'send_mail'])->middleware('owner.auth');
+Route::post('/send_mail', [ManageController::class, 'send_mail'])->middleware('owner.auth');
+Route::get('/update', [ManageController::class, 'update'])->middleware('owner.auth');
+Route::post('/update', [ManageController::class, 'update'])->middleware('owner.auth');
+Route::get('/check/{reserve_id}', [ManageController::class, 'check'])->name('check');

@@ -31,8 +31,14 @@ class AuthController extends Controller
                 }
             }
         }
+        if(!empty($user_id)){
+            $favorite = favorite::where('user_id','=',$user_id['id'])->get();
+        } else {
+            $favorite = null;
+        }
         $area = "";
         $genre = "";
-        return view('index', compact('user_id','shop','area','genre'));
+        $fav_access = '';
+        return view('index', compact('shop','favorite','area','genre','fav_access'));
     }
 }

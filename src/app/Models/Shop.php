@@ -27,21 +27,21 @@ class shop extends Model
 
     public function favorites()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Favorite::class);
     }
 
     public function reservations()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Reservation::class);
     }
 
     public function owners()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Owner::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Review::class);
     }
 }

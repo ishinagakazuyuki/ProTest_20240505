@@ -29,22 +29,8 @@
             $favorite = 1;
           }
           ?>
-          @if ($favorite === 1)
+          @if (Auth::check())
           <div class="menu-content">
-            <ul>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                  <a href="/register">Registration</a>
-              </li>
-              <li>
-                  <a href="/login">Login</a>
-              </li>
-            </ul>
-          </div>
-        @else
-        <div class="menu-content">
             <ul>
                 <li>
                     <a href="/index">Home</a>
@@ -59,8 +45,22 @@
                     <a href="/mypage">Mypage</a>
                 </li>
             </ul>
-        </div>
-        @endif
+          </div>
+          @else
+          <div class="menu-content">
+            <ul>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                  <a href="/register">Registration</a>
+              </li>
+              <li>
+                  <a href="/login">Login</a>
+              </li>
+            </ul>
+          </div>
+          @endif
         </div>
         <div class="header__logo">
           <p class="header__logo">Rese</p>

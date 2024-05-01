@@ -74,25 +74,4 @@ class RegisterController extends Controller
             'auth' => 'common'
         ]);
     }
-
-    public function redirectPath()
-    {
-        if($_POST["company_register"] == 1){
-            $user_id = Auth::user();
-            $shop = shop::get();
-            foreach($shop as $shops ){
-                favorite::create([
-                    'user_id' => $user_id['id'],
-                    'shops_id' => $shops['id'],
-                    'fav_flg' => 'LightGrey',
-                ]);
-            }
-            Auth::logout();
-            return '/thanks';
-        }elseif($_POST["company_register"] == 2){
-            Auth::logout();
-            return '/manage';
-        }
-            return '/';
-    }
 }

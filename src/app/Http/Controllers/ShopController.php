@@ -126,7 +126,7 @@ class ShopController extends Controller
                 }
             }
         }
-        return view('index', compact('shop','favorite','area','genre'));
+        return view('index', compact('shop','area','genre'));
     }
 
     public function detail(Request $request){

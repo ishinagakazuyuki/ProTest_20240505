@@ -69,23 +69,20 @@
 @section('content')
 <div class="list">
     @foreach ($shop as $shops)
-    <?php
-    $fav_access = '';
-    ?>
-    @if (empty($user_id))
-    <?php
-    $shops = [
-        'id' => $shops['id'],
-        'user_id' => 'no',
-        'name' => $shops['name'],
-        'area'=> $shops['areas_id'],
-        'genre'=> $shops['genres_id'],
-        'image' => $shops['image'],
-        'fav_flg'=> 'LightGrey',
-    ];
-    $fav_access = 'disabled';
-    ?>
-    @endif
+        @if (Auth::guest())
+        <?php
+        $shops = [
+            'id' => $shops['id'],
+            'user_id' => 'no',
+            'name' => $shops['name'],
+            'areas_id'=> $shops['areas_id'],
+            'genres_id'=> $shops['genres_id'],
+            'image' => $shops['image'],
+        
+        ];
+        $fav_access = 'disabled';
+        ?>
+        @endif
     <div class="list__item">
         <div>
             <img class="list__img" src="storage/images/{{ $shops['image'] }}" alt="" />
@@ -93,8 +90,8 @@
         <div class="list__content">
             <span class="list_name">{{ $shops['name'] }}</span>
             <div class="tag">
-                <span class="list__tag">#{{ $shops['area'] }}</span>
-                <span class="list__tag">#{{ $shops['genre'] }}</span>
+                <span class="list__tag">#{{ $shops['areas_id'] }}</span>
+                <span class="list__tag">#{{ $shops['genres_id'] }}</span>
             </div>
             <div class="list__button">
                 <div>
@@ -103,17 +100,44 @@
                         <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                     </form>
                 </div>
+                @if (!empty($favorite[0]))
+                @foreach ($favorite as $favorites)
+                    @if ($shops['id'] !== $favorites['shops_id'])
+                        <?php
+                        $favorites = [
+                            'fav_flg'=> 'LightGrey',
+                        ];
+                        ?>
+                    @else
+                        <?php
+                        $favorites = [
+                            'fav_flg'=> 'Red',
+                        ];
+                        ?>
+                    @endif
                 <div class="list__button-favorite">
                     <form action="?" method="post">
                     @csrf
                         <div>
-                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$shops['fav_flg']}}">&hearts;</font></button>
+                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$favorites['fav_flg']}}">&hearts;</font></button>
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             <input type="hidden" name="user_id" value="{{ $shops['user_id'] }}" />
-                            <input type="hidden" name="fav_flg" value="{{ $shops['fav_flg'] }}" />
                         </div>
                     </form>
                 </div>
+                @endforeach
+                @else
+                <div class="list__button-favorite">
+                    <form action="?" method="post">
+                    @csrf
+                        <div>
+                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="LightGrey">&hearts;</font></button>
+                            <input type="hidden" name="id" value="{{ $shops['id'] }}" />
+                            <input type="hidden" name="user_id" value="{{ $shops['user_id'] }}" />
+                        </div>
+                    </form>
+                </div>
+                @endif                
             </div>
         </div>
     </div>

@@ -22,13 +22,13 @@ class favorite extends Model
         }
     }
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function shop()
+    public function shops()
     {
-        return $this->belongsTo(shop::class);
+        return $this->belongsTo(Shop::class);
     }
 }

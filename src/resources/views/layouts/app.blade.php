@@ -33,7 +33,7 @@
           <div class="menu-content">
             <ul>
                 <li>
-                    <a href="/index">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
                     <form class="menu-logout" action="/logout" method="post">

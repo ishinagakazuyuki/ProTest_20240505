@@ -78,70 +78,48 @@ class ShopController extends Controller
                 }
             }
         }
-        if(empty($user_id)){
-            if($request['area'] === 'All area'){
-                if($request['genre'] === 'All genre'){
-                    if (!empty($request['text'])) {
-                        $shop = $shop->where('name','=',$request['text']);
-                    }
-                    $area = "";
-                    $genre = "";
-                }else{
-                    if (!empty($request['text'])) {
-                        $shop = $shop->where('genres_id','=',$request['genre'])->where('name','=',$request['text']);
-                    } else {
-                        $shop = $shop->where('genres_id','=',$request['genre']);
-                    }
-                    $area = "";
-                    $genre = $request['genre'];
+        if($request['area'] === 'All area'){
+            if($request['genre'] === 'All genre'){
+                if (!empty($request['text'])) {
+                    $shop = $shop->where('name','=',$request['text']);
                 }
+                $area = "";
+                $genre = "";
             }else{
-                if($request['genre'] === 'All genre'){
-                    if (!empty($request['text'])) {
-                        $shop = $shop->where('areas_id','=',$request['area'])->where('name','=',$request['text']);
-                    } else {
-                        $shop = $shop->where('areas_id','=',$request['area']);
-                    }
-                    $area = $request['area'];
-                    $genre = "";
-                }else{
-                    if (!empty($request['text'])) {
-                        $shop = $shop->where('areas_id','=',$request['area'])->where('genres_id','=',$request['genre'])->where('name','=',$request['text']);
-                    } else {
-                        $shop = $shop->where('areas_id','=',$request['area'])->where('genres_id','=',$request['genre']);
-                    }
-                    $area = $request['area'];
-                    $genre = $request['genre'];
+                if (!empty($request['text'])) {
+                    $shop = $shop->where('genres_id','=',$request['genre'])->where('name','=',$request['text']);
+                } else {
+                    $shop = $shop->where('genres_id','=',$request['genre']);
                 }
+                $area = "";
+                $genre = $request['genre'];
             }
         }else{
-            if($request['area'] === 'All area'){
-                if($request['genre'] === 'All genre'){
-                    $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                        ->TextSearch($request->text)->orderBy('shops.id', 'asc')->get();
-                    $area = "";
-                    $genre = "";
-                }else{
-                    $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                        ->where('genre','=',$request['genre'])->TextSearch($request->text)->orderBy('shops.id', 'asc')->get();
-                    $area = "";
-                    $genre = $request['genre'];
+            if($request['genre'] === 'All genre'){
+                if (!empty($request['text'])) {
+                    $shop = $shop->where('areas_id','=',$request['area'])->where('name','=',$request['text']);
+                } else {
+                    $shop = $shop->where('areas_id','=',$request['area']);
                 }
+                $area = $request['area'];
+                $genre = "";
             }else{
-                if($request['genre'] === 'All genre'){
-                    $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                        ->where('area','=',$request['area'])->TextSearch($request->text)->orderBy('shops.id', 'asc')->get();
-                    $area = $request['area'];
-                    $genre = "";
-                }else{
-                    $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                        ->where('area','=',$request['area'])->where('genre','=',$request['genre'])->TextSearch($request->text)->orderBy('shops.id', 'asc')->get();
-                    $area = $request['area'];
-                    $genre = $request['genre'];
+                if (!empty($request['text'])) {
+                    $shop = $shop->where('areas_id','=',$request['area'])->where('genres_id','=',$request['genre'])->where('name','=',$request['text']);
+                } else {
+                    $shop = $shop->where('areas_id','=',$request['area'])->where('genres_id','=',$request['genre']);
                 }
+                $area = $request['area'];
+                $genre = $request['genre'];
             }
         }
-        return view('index', compact('shop','area','genre'));
+        if(!empty($user_id)){
+            $favorite = favorite::where('user_id','=',$user_id['id'])->get();
+        } else {
+            $favorite = null;
+        }
+        $fav_access = '';
+        return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
     }
 
     public function detail(Request $request){

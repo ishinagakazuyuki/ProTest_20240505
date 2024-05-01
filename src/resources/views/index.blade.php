@@ -101,39 +101,40 @@
                     </form>
                 </div>
                 @if (!empty($favorite[0]))
+                    <?php
+                    $fav_flg = [
+                        'fav_flg'=> 'LightGrey',
+                    ];
+                    ?>
                 @foreach ($favorite as $favorites)
-                    @if ($shops['id'] !== $favorites['shops_id'])
+                    @if ($shops['id'] === $favorites['shops_id'])
                         <?php
-                        $favorites = [
-                            'fav_flg'=> 'LightGrey',
-                        ];
-                        ?>
-                    @else
-                        <?php
-                        $favorites = [
+                        $fav_flg = [
                             'fav_flg'=> 'Red',
                         ];
                         ?>
                     @endif
+                @endforeach
                 <div class="list__button-favorite">
                     <form action="?" method="post">
                     @csrf
                         <div>
-                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$favorites['fav_flg']}}">&hearts;</font></button>
+                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$fav_flg['fav_flg']}}">&hearts;</font></button>
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />
                         </div>
                     </form>
                 </div>
-                @endforeach
                 @else
                 <div class="list__button-favorite">
                     <form action="?" method="post">
                     @csrf
                         <div>
                             <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="LightGrey">&hearts;</font></button>
+                            @if (Auth::check())
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />
+                            @endif
                         </div>
                     </form>
                 </div>

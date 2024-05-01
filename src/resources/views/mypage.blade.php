@@ -31,10 +31,6 @@
                         <td class="mypage_reserve-item-name3">
                             <button class="mypage_reserve-item-name3-button" value="get" formaction="{{ route('payment.payment') }}">お支払い</button>
                         </td>
-                        <td class="mypage_reserve-item-name3">
-                            <button class="mypage_reserve-item-name3-button" value="post" formaction="/review">レビュー</button>
-                            <input type="hidden" name='shop_id' value="{{ $reserves['shops_id'] }}">
-                        </td>
                         <td class="mypage_reserve-item-name4">
                             <button class="mypage_reserve-item-button" value="post" formaction="/reserve_delete"></button>
                             <input type="hidden" name='reserve_id' value="{{ $reserves['id'] }}">
@@ -98,32 +94,32 @@
             <span>お気に入り店舗</span>
         </div>
         <div class="mypage_favorite-list">
-        @foreach ($favorite as $favorites)
+        @foreach ($shop as $shops)
             <div class="mypage_favorite-item">
                 <div>
-                    <img class="mypage_favorite-img" src="../storage/images/{{ $favorites['name'] }}.jpg" alt="" />
+                    <img class="mypage_favorite-img" src="../storage/images/{{ $shops['image'] }}" alt="" />
                 </div>
                 <div class="mypage_favorite_content">
-                    <span class="mypage_favorite_name">{{ $favorites['name'] }}</span>
+                    <span class="mypage_favorite_name">{{ $shops['name'] }}</span>
                     <div class="tag">
-                        <span class="mypage_favorite_tag">#{{ $favorites['area'] }}</span>
-                        <span class="mypage_favorite_tag">#{{ $favorites['genre'] }}</span>
+                        <span class="mypage_favorite_tag">#{{ $shops['areas_id'] }}</span>
+                        <span class="mypage_favorite_tag">#{{ $shops['genres_id'] }}</span>
                     </div>
                     <div class="mypage_favorite_button">
                         <div>
                             <form action="?" method="get">
-                                <button class="mypage_favorite_button-detail" type="submit" value="get" formaction="{{ route('detail',['shop_id' => $favorites['id'] ]) }}">詳しく見る</button>
-                                <input type="hidden" name="id" value="{{ $favorites['id'] }}" />
+                                <button class="mypage_favorite_button-detail" type="submit" value="get" formaction="{{ route('detail',['shop_id' => $shops['id'] ]) }}">詳しく見る</button>
+                                <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             </form>
                         </div>
                         <div class="mypage_favorite_button-favorite">
                             <form action="?" method="post">
                             @csrf
                                 <div>
-                                    <button class="mypage_favorite_button-favorite-item" type="submit" value="post" formaction="/favo_change_mypage"><font color="{{$favorites['fav_flg']}}">&hearts;</font></button>
-                                    <input type="hidden" name="id" value="{{ $favorites['id'] }}" />
-                                    <input type="hidden" name="user_id" value="{{ $favorites['user_id'] }}" />
-                                    <input type="hidden" name="fav_flg" value="{{ $favorites['fav_flg'] }}" />
+                                    <button class="mypage_favorite_button-favorite-item" type="submit" value="post" formaction="/favo_change_mypage"><font color="Red">&hearts;</font></button>
+                                    <input type="hidden" name="id" value="{{ $shops['id'] }}" />
+                                    <input type="hidden" name="user_id" value="{{ $shops['user_id'] }}" />
+                                    <input type="hidden" name="fav_flg" value="{{ $shops['fav_flg'] }}" />
                                 </div>
                             </form>
                         </div>

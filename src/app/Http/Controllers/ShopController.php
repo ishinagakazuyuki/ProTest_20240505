@@ -164,9 +164,23 @@ class ShopController extends Controller
         $users = Auth::user();
         $reserve = shop::join('reservations','shops.id','reservations.shops_id')->where('user_id','=',$users['id'])
                     ->orderBy('reservations.datetime', 'asc')->get();
-        $favorite = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
-            ->where('fav_flg','=','Red')->orderBy('shops.id', 'asc')->get();
-        return view('mypage', compact('users','reserve','favorite'));
+        $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
+            ->orderBy('shops.id', 'asc')->get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        return view('mypage', compact('users','reserve','shop'));
     }
 
     public function reserve_delete(Request $request){
@@ -174,26 +188,55 @@ class ShopController extends Controller
         reservation::where('id','=',$request['reserve_id'])->delete();
         $reserve = shop::join('reservations','shops.id','reservations.shops_id')->where('user_id','=',$users['id'])
                     ->orderBy('reservations.datetime', 'asc')->get();
-        $favorite = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
-            ->where('fav_flg','=','Red')->orderBy('shops.id', 'asc')->get();
-        return view('mypage', compact('users','reserve','favorite'));
+        $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
+            ->orderBy('shops.id', 'asc')->get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        return view('mypage', compact('users','reserve','shop'));
     }
 
     public function favo_change_mypage(Request $request){
-        if($request['fav_flg'] === 'Red'){
-            $fav_flg = 'LightGrey';
-        }elseif($request['fav_flg'] === 'LightGrey'){
-            $fav_flg = 'Red';
+        $favo_check = favorite::where('user_id','=',$request['user_id'])->where('shops_id','=',$request['id'])->first();
+        if (empty($favo_check)){
+            favorite::create([
+                'user_id' => $request['user_id'],
+                'shops_id' => $request['id'],
+            ]);            
+        } else {
+            $favo_check->delete();
         }
-        favorite::where('shops_id','=',$request['id'])->where('user_id','=',$request['user_id'])->first()->update([
-            'fav_flg' => $fav_flg,
-        ]);
         $users = Auth::user();
         $reserve = shop::join('reservations','shops.id','reservations.shops_id')->where('user_id','=',$users['id'])
             ->orderBy('reservations.datetime', 'asc')->get();
-        $favorite = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
-            ->where('fav_flg','=','Red')->orderBy('shops.id', 'asc')->get();
-        return view('mypage', compact('users','reserve','favorite'));
+        $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
+            ->orderBy('shops.id', 'asc')->get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        return view('mypage', compact('users','reserve','shop'));
     }
 
     public function reserve_change(ReserveRequest $request){
@@ -206,9 +249,23 @@ class ShopController extends Controller
         ]);
         $reserve = shop::join('reservations','shops.id','reservations.shops_id')->where('user_id','=',$users['id'])
                     ->orderBy('reservations.datetime', 'asc')->get();
-        $favorite = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
-            ->where('fav_flg','=','Red')->orderBy('shops.id', 'asc')->get();
-        return view('mypage', compact('users','reserve','favorite'));
+        $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$users['id'])
+            ->orderBy('shops.id', 'asc')->get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        return view('mypage', compact('users','reserve','shop'));
     }
 
     public function payment(Request $request){

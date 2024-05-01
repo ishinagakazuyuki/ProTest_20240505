@@ -39,6 +39,6 @@ class AuthController extends Controller
         $area = "";
         $genre = "";
         $fav_access = '';
-        return view('index', compact('shop','favorite','area','genre','fav_access'));
+        return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
     }
 }

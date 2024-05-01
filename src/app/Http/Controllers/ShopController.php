@@ -29,21 +29,36 @@ class ShopController extends Controller
     }
 
     public function favo_change(Request $request){
-        if($request['fav_flg'] === 'Red'){
-            $fav_flg = 'LightGrey';
-        }elseif($request['fav_flg'] === 'LightGrey'){
-            $fav_flg = 'Red';
+        $favo_check = favorite::where('user_id','=',$request['user_id'])->where('shops_id','=',$request['id'])->first();
+        if (empty($favo_check)){
+            favorite::create([
+                'user_id' => $request['user_id'],
+                'shops_id' => $request['id'],
+            ]);            
+        } else {
+            $favo_check->delete();
         }
-        favorite::where('shops_id','=',$request['id'])->where('user_id','=',$request['user_id'])->first()->update([
-            'fav_flg' => $fav_flg,
-        ]);
         $user_id = Auth::user();
-        $favorite = 2;
-        $shop = favorite::join('shops','favorites.shops_id','shops.id')->where('user_id','=',$user_id['id'])
-                ->orderBy('shops.id', 'asc')->get();
+        $shop = shop::get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        $favorite = favorite::where('user_id','=',$user_id['id'])->get();
         $area = "";
         $genre = "";
-        return view('list', compact('shop','favorite','area','genre'));
+        $fav_access = '';
+        return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
     }
 
     public function search(Request $request){

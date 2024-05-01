@@ -121,7 +121,7 @@
                         <div>
                             <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$favorites['fav_flg']}}">&hearts;</font></button>
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
-                            <input type="hidden" name="user_id" value="{{ $shops['user_id'] }}" />
+                            <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />
                         </div>
                     </form>
                 </div>
@@ -133,7 +133,7 @@
                         <div>
                             <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="LightGrey">&hearts;</font></button>
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
-                            <input type="hidden" name="user_id" value="{{ $shops['user_id'] }}" />
+                            <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />
                         </div>
                     </form>
                 </div>

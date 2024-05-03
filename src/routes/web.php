@@ -38,8 +38,8 @@ Route::post('/reserve_delete', [ReserveController::class, 'reserve_delete']);
 Route::get('/reserve_change', [ReserveController::class, 'reserve_change']);
 Route::post('/reserve_change', [ReserveController::class, 'reserve_change']);
 
-Route::get('/review', [ReviewController::class, 'review']);
-Route::post('/review', [ReviewController::class, 'reviews']);
+Route::get('/review/{shop_id}', [ReviewController::class, 'review'])->name('review');
+Route::post('/review/{shop_id}', [ReviewController::class, 'reviews']);
 
 Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');

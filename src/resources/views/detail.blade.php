@@ -20,6 +20,13 @@
     <div class="detail__overview">
         <span>#{{ $shop['overview'] }}</span>
     </div>
+    <div>
+        <br>
+        <form action="?" method="get">
+            <button class="list__button-detail" type="submit" value="get" formaction="{{ route('review',['shop_id' => $shop['id'] ]) }}">口コミを投稿する</button>
+            <input type="hidden" name="id" value="{{ $shop['id'] }}" />
+        </form>
+    </div>
 </div>
 
 <div class="reserve_content">

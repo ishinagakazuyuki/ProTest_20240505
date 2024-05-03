@@ -14,6 +14,7 @@ class review extends Model
         'shops_id',
         'review',
         'comment',
+        'review_image',
     ];
 
     public function user()

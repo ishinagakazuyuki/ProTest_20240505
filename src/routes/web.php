@@ -40,6 +40,9 @@ Route::post('/reserve_change', [ReserveController::class, 'reserve_change']);
 
 Route::get('/review/{shop_id}', [ReviewController::class, 'review'])->name('review');
 Route::post('/review/{shop_id}', [ReviewController::class, 'reviews']);
+Route::post('/detail/{shop_id}', [ReviewController::class, 'review_delete']);
+Route::get('/review_edit/{shop_id}', [ReviewController::class, 'review_edit'])->name('review_edit');
+Route::post('/review_update/{shop_id}', [ReviewController::class, 'review_update'])->name('review_update');
 
 Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');

@@ -1,6 +1,7 @@
 .detail__content {
     width: 45%;
     padding-left: 5vw;
+    margin-bottom: 50px;
 }
 
 .detail__title {
@@ -36,9 +37,45 @@
     margin-bottom: 25px;
 }
 
+.detail__review {
+    margin-bottom: 30px;
+}
+
 .detail__overview {
     font-size: 17px;
+    margin-bottom: 30px;
 }
+
+.detail__comment {
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+}
+
+.detail__comment-edit {
+    display: flex;
+    width: 35%;
+    margin-left: auto;
+}
+
+.star {
+    color: grey;
+    font-size: 40px;
+}
+
+.rating-1 .star:nth-child(-n+1),
+.rating-2 .star:nth-child(-n+2),
+.rating-3 .star:nth-child(-n+3),
+.rating-4 .star:nth-child(-n+4),
+.rating-5 .star:nth-child(-n+5) {
+    color: blue;
+}
+
+.detail__comment-item {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
 
 .reserve_content {
     position: fixed;

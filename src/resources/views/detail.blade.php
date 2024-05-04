@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+<?php
+    $comment_flg = "";
+    if (Auth::guest()){
+        $comment_flg = 'disabled';
+    }
+?>
 <div class="detail__content">
     <div class='detail__title'>
         <button class='detail_title-back' type="button" onClick="history.go({{ $count }})"><</button>
@@ -20,13 +26,50 @@
     <div class="detail__overview">
         <span>#{{ $shop['overview'] }}</span>
     </div>
-    <div>
-        <br>
+    @if (empty($user_review))
+    <div class="detail__review">
         <form action="?" method="get">
-            <button class="list__button-detail" type="submit" value="get" formaction="{{ route('review',['shop_id' => $shop['id'] ]) }}">口コミを投稿する</button>
+            <button class="list__button-detail" type="submit" value="get" formaction="{{ route('review',['shop_id' => $shop['id'] ]) }}" {{$comment_flg}}>口コミを投稿する</button>
             <input type="hidden" name="id" value="{{ $shop['id'] }}" />
         </form>
     </div>
+    @endif
+    @if (!empty($review))
+    <div class="detail__comment">
+        <div class="detail__comment-edit">
+            @if ($review_edit === 1)
+            <div>
+                <form action="{{ route('review_edit',['shop_id' => $shop['id'] ]) }}" method="get">
+                    @csrf
+                    <button class="list__button-detail" type="submit">口コミを編集</button>
+                    <input type="hidden" name="user_review_id" value="{{ $user_review['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $shop['id'] }}" />
+                </form>
+            </div>
+            @endif
+            @if ($review_del === 1)
+            <div>
+                <form action="{{ route('detail',['shop_id' => $shop['id'] ]) }}" method="post">
+                    @csrf
+                    <button class="list__button-detail" type="submit">口コミを削除</button>
+                    <input type="hidden" name="user_review_id" value="{{ $user_review['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $shop['id'] }}" />
+                </form>
+            </div>
+            @endif
+        </div>
+        <div class="rating rating-{{$review['review']}}">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+        <div class="detail__comment-item">
+            <span>{{$review['comment']}}</span>
+        </div>
+    </div>
+    @endif
 </div>
 
 <div class="reserve_content">

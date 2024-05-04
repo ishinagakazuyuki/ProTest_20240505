@@ -71,17 +71,6 @@
   </header>
   <main>
     <div class="main" >
-      <div class="todo__alert">
-        @if ($errors->any())
-        <div  class="todo__alert--danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
-      </div>
     @yield('content')
     </div>
   </main>

@@ -122,7 +122,7 @@ class ReviewController extends Controller
         return view('reviewedit', compact('shop','favorite','review'));
     }
 
-    public function review_update(Request $request){
+    public function review_update(ReviewRequest $request){
         $users = Auth::user();
         $file = $request->file('image');
         $filename = $file->getClientOriginalName();

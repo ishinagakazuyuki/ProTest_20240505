@@ -136,4 +136,60 @@ class ShopController extends Controller
         }
         return view('mypage', compact('users','reserve','shop'));
     }
+
+    public function sort(Request $request){
+        $user_id = Auth::user();
+        if ($request['sort'] === "ランダム"){
+            $shop = shop::orderByRaw('RAND()')->get();
+            $sort = "ランダム";
+        } else {
+            $shop = shop::get();
+            foreach ($shop as $shops){
+                $review = review::where('shops_id','=',$shops['id'])->first();
+                if(empty($review)){
+                    $shops->review_point = 0;
+                }else {
+                    $review = review::where('shops_id','=',$shops['id'])->get();
+                    $review_count = 0;
+                    foreach ($review as $reviews){
+                        $point = $reviews['review'];
+                        $review_count = $review_count + $point;
+                    }
+                    $shops->review_point = $review_count;
+                }
+            }
+        }
+        if ($request['sort'] === "評価が高い順"){
+            $shop = $shop->sortByDesc('review_point');
+            $sort = "評価が高い順";
+        } else {
+            $shop = $shop->sortBy('review_point');
+            $sort = "評価が低い順";
+        }
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        if(!empty($user_id)){
+            $favorite = favorite::where('user_id','=',$user_id['id'])->get();
+        } else {
+            $favorite = null;
+        }
+        
+        $area = "";
+        $genre = "";
+        $fav_access = '';
+        return view('index', compact('user_id','shop','favorite','sort','area','genre','fav_access'));
+    }
+
 }

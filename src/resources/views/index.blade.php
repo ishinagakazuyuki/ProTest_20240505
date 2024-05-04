@@ -5,6 +5,32 @@
 @endsection
 
 @section('title')
+<div class="header-sort">
+    <form id="sort" action="/sort" method="get">
+        <select class="header-search__item" name="sort" id="sort">
+            <?php
+                $sortList = array(
+                    "並び替え：評価高／低",
+                    "ランダム",
+                    "評価が高い順",
+                    "評価が低い順",
+                );
+                foreach($sortList as $value){
+                    if($value === $sort){
+                    echo "<option value='$value' selected>".$value."</option>";
+                    }else{
+                    echo "<option value='$value'>".$value."</option>";
+                    }
+                }
+            ?>
+        </select>
+            <script>
+                document.getElementById('sort').addEventListener('change', function() {
+                    document.getElementById('sort').submit();
+                });
+            </script>
+    </form>
+</div>
 <div class="header-search">
     <div class="header-search__sub">
         <form id="search" action="/search" method="get">

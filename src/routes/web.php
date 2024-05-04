@@ -28,6 +28,7 @@ Route::get('/search', [ShopController::class, 'search']);
 Route::get('/detail/{shop_id}', [ShopController::class, 'detail'])->name('detail');
 Route::get('/done', [ShopController::class, 'done']);
 Route::get('/mypage', [ShopController::class, 'mypage']);
+Route::get('/sort', [ShopController::class, 'sort']);
 
 Route::post('/favo_change', [FavoriteController::class, 'favo_change']);
 Route::post('/favo_change_mypage', [FavoriteController::class, 'favo_change_mypage']);

@@ -134,6 +134,11 @@
     color: red;
 }
 
+.header-sort {
+    padding: 20px 0;
+    margin-left: 20px;
+}
+
 .header-search{
     display: flex;
     background-color: White;
@@ -168,13 +173,6 @@
     width: 60%;
 }
 
-@media screen and (max-width: 1000px) {
-    .header-search__text {
-        border: none;
-        width: 40%;
-    }
-}
-
 .body {
     background-color: WhiteSmoke;
 }
@@ -188,6 +186,31 @@
 }
 
 @media screen and (max-width: 768px) {
+    .header__logo {
+        font-size: 30px;
+    }
+
+    .menu-content ul li a {
+        font-size: 25px;
+    }
+
+    .menu-logout {
+        font-size: 25px;
+    }
+
+    .header-search {
+        width: 45%;
+    }
+
+    .header-search__item {
+        font-size: 10px;
+    }
+
+    .header-search__text {
+        width: 30%;
+        font-size: 12px;
+    }
+
     .todo__alert {
         font-size: 15px;
         width: 40%;

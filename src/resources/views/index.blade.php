@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/list.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
 @section('title')
@@ -9,13 +9,13 @@
     <form id="sort" action="/sort" method="get">
         <select class="header-search__item" name="sort" id="sort">
             <?php
-                $sortList = array(
+                $sortindex = array(
                     "並び替え：評価高／低",
                     "ランダム",
                     "評価が高い順",
                     "評価が低い順",
                 );
-                foreach($sortList as $value){
+                foreach($sortindex as $value){
                     if($value === $sort){
                     echo "<option value='$value' selected>".$value."</option>";
                     }else{
@@ -25,7 +25,7 @@
             ?>
         </select>
             <script>
-                document.getElementById('sort').addEventListener('change', function() {
+                document.getElementById('sort').addEventindexener('change', function() {
                     document.getElementById('sort').submit();
                 });
             </script>
@@ -36,13 +36,13 @@
         <form id="search" action="/search" method="get">
             <select class="header-search__item" name="area" id="area">
                 <?php
-                $areaList = array(
+                $areaindex = array(
                     "All area",
                     "東京都",
                     "大阪府",
                     "福岡県",
                 );
-                foreach($areaList as $value){
+                foreach($areaindex as $value){
                     if($value === $area){
                     echo "<option value='$value' selected>".$value."</option>";
                     }else{
@@ -52,13 +52,13 @@
                 ?>
             </select>
             <script>
-                document.getElementById('area').addEventListener('change', function() {
+                document.getElementById('area').addEventindexener('change', function() {
                     document.getElementById('search').submit();
                 });
             </script>
             <select class="header-search__item" name="genre" id="genre">
                 <?php
-                $genreList = array(
+                $genreindex = array(
                     "All genre",
                     "居酒屋",
                     "寿司",
@@ -66,7 +66,7 @@
                     "イタリアン",
                     "ラーメン",
                 );
-                foreach($genreList as $value){
+                foreach($genreindex as $value){
                     if($value === $genre){
                     echo "<option value='$value' selected>".$value."</option>";
                     }else{
@@ -76,14 +76,14 @@
                 ?>
             </select>
             <script>
-                document.getElementById('genre').addEventListener('change', function() {
+                document.getElementById('genre').addEventindexener('change', function() {
                     document.getElementById('search').submit();
                 });
             </script>
             <svg class="header-search__icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
             <input class="header-search__text" id="text" name="text" type="search" placeholder="Search...">
             <script>
-                document.getElementById('text').addEventListener('change', function() {
+                document.getElementById('text').addEventindexener('change', function() {
                     document.getElementById('search').submit();
                 });
             </script>
@@ -93,7 +93,7 @@
 @endsection
 
 @section('content')
-<div class="list">
+<div class="index">
     @foreach ($shop as $shops)
         @if (Auth::guest())
         <?php
@@ -109,20 +109,20 @@
         $fav_access = 'disabled';
         ?>
         @endif
-    <div class="list__item">
+    <div class="index__item">
         <div>
-            <img class="list__img" src="storage/images/{{ $shops['image'] }}" alt="" />
+            <img class="index__img" src="storage/images/{{ $shops['image'] }}" alt="" />
         </div>
-        <div class="list__content">
-            <span class="list_name">{{ $shops['name'] }}</span>
+        <div class="index__content">
+            <span class="index_name">{{ $shops['name'] }}</span>
             <div class="tag">
-                <span class="list__tag">#{{ $shops['areas_id'] }}</span>
-                <span class="list__tag">#{{ $shops['genres_id'] }}</span>
+                <span class="index__tag">#{{ $shops['areas_id'] }}</span>
+                <span class="index__tag">#{{ $shops['genres_id'] }}</span>
             </div>
-            <div class="list__button">
+            <div class="index__button">
                 <div>
                     <form action="?" method="get">
-                        <button class="list__button-detail" type="submit" value="get" formaction="{{ route('detail',['shop_id' => $shops['id'] ]) }}">詳しく見る</button>
+                        <button class="index__button-detail" type="submit" value="get" formaction="{{ route('detail',['shop_id' => $shops['id'] ]) }}">詳しく見る</button>
                         <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                     </form>
                 </div>
@@ -141,22 +141,22 @@
                         ?>
                     @endif
                 @endforeach
-                <div class="list__button-favorite">
+                <div class="index__button-favorite">
                     <form action="?" method="post">
                     @csrf
                         <div>
-                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$fav_flg['fav_flg']}}">&hearts;</font></button>
+                            <button class="index__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="{{$fav_flg['fav_flg']}}">&hearts;</font></button>
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />
                         </div>
                     </form>
                 </div>
                 @else
-                <div class="list__button-favorite">
+                <div class="index__button-favorite">
                     <form action="?" method="post">
                     @csrf
                         <div>
-                            <button class="list__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="LightGrey">&hearts;</font></button>
+                            <button class="index__button-favorite-item" type="submit" value="post" formaction="/favo_change" {{$fav_access}}><font color="LightGrey">&hearts;</font></button>
                             @if (Auth::check())
                             <input type="hidden" name="id" value="{{ $shops['id'] }}" />
                             <input type="hidden" name="user_id" value="{{ $user_id['id'] }}" />

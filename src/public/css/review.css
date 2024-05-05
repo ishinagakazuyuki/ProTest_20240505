@@ -191,11 +191,49 @@
 }
 
 @media screen and (max-width: 768px) {
-    .review-title {
+    .review_main {
+        margin: 0px 30px;
+    }
+
+    .review_left {
+        width: 45%;
+        margin-right: 20px;
+    }
+
+    .review_left-title {
         font-size: 30px;
     }
 
-    .review-main {
-        font-size: 20px;
+    .review_left-item {
+        width: 90%;
+        margin-left: 5px;
+    }
+
+    .review_right {
+        width: 70%;
+    }
+
+    .review-form_label {
+        font-size: 25px;
+    }
+
+    .review-form_textarea {
+        width: 100%;
+    }
+
+    .charCount {
+        width: 40%;
+    }
+
+    #drop-area {
+        width: 100%;
+    }
+
+    .drop-text {
+        font-size: 14px;
+    }
+
+    .review-form__button-submit {
+        font-size: 25px;
     }
 }

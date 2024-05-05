@@ -94,19 +94,28 @@ class ShopController extends Controller
         $review_del = 0;
         $review_edit = 0;
 
-        if(!empty($user_id)){
-            if ($user_id['id'] === $review['user_id']){
-                $review_make = 0;
-                $review_del = 1;
-                $review_edit = 1;
-            } elseif ($user_id['id'] !== $review['user_id']){
-                $review_make = 1;
-            } elseif ($user_id['auth'] === "manage") {
-                $review_make = 0;
-                $review_del = 1;
-                $review_edit = 0;
-            } 
+        if (!empty($review)){
+            if(!empty($user_id)){
+                if ($user_id['id'] === $review['user_id']){
+                    $review_make = 0;
+                    $review_del = 1;
+                    $review_edit = 1;
+                } elseif ($user_id['id'] !== $review['user_id']){
+                    $review_make = 1;
+                } elseif ($user_id['auth'] === "manage") {
+                    $review_make = 0;
+                    $review_del = 1;
+                    $review_edit = 0;
+                } 
+            }
+        } else {
+            if(!empty($user_id)){
+                if ($user_id['auth'] === "common") {
+                    $review_make = 1;
+                } 
+            }            
         }
+
         $count = -1;
         return view('detail', compact('user_id','shop','count','review','review_make','review_del','review_edit'));
     }

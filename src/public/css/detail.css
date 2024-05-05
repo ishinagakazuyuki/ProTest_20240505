@@ -180,6 +180,15 @@
         font-size: 15px;
     }
 
+    .detail__comment-item {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .detail__comment-edit {
+        width: 75%;
+    }
+
     .reserve_content {
         height: 620px;
     }

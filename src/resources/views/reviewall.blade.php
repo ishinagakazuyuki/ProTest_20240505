@@ -62,13 +62,13 @@
                     @csrf
                     <button class="list__button-detail" type="submit">口コミを編集</button>
                     <input type="hidden" name="user_review_id" value="{{ $reviews['user_id'] }}" />
-                    <input type="hidden" name="id" value="{{ $reviews['shop_id'] }}" />
+                    <input type="hidden" name="id" value="{{ $reviews['shops_id'] }}" />
                 </form>
             </div>
             @endif
             @if ($reviews['user_id'] === $users['id'] || $users['auth'] === 'manage')
             <div>
-                <form action="{{ route('detail',['shop_id' => $shop['id'] ]) }}" method="post">
+                <form action="{{ route('detail',['shop_id' => $reviews['id'] ]) }}" method="post">
                     @csrf
                     <button class="list__button-detail" type="submit">口コミを削除</button>
                     <input type="hidden" name="user_review_id" value="{{ $reviews['user_id'] }}" />

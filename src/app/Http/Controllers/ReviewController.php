@@ -74,29 +74,35 @@ class ReviewController extends Controller
         $user_id = Auth::user();
         $shop = shop::join('areas','shops.areas_id','areas.id')->join('genres','shops.genres_id','genres.id')
                 ->where('shops.id','=',$request['id'])->first();
-        $review = review::where('shops_id','=',$request['id'])->orderBy('shops_id', 'asc')->first();
-        if(!empty($user_id)){
-            $user_review = review::where('user_id','=',$user_id['id'])->where('shops_id','=',$request['id'])->first();
-        } else {
-            $user_review = null;
-        }
-        if(empty($user_id)){
-            $review_del = 0;
-            $review_edit = 0;
-        } elseif(empty($review)){
-            $review_del = 0;
-            $review_edit = 0;
-        } elseif(!empty($review)){        
-            if ($user_id['id'] === $review['user_id']){
-                $review_del = 1;
-                $review_edit = 1;
-            } elseif ($user_id['auth'] === "manage") {
-                $review_del = 1;
-                $review_edit = 0;
+        $review = review::where('shops_id','=',$request['id'])->orderBy('shops_id', 'desc')->first();
+        $review_make = 0;
+        $review_del = 0;
+        $review_edit = 0;
+
+        if (!empty($review)){
+            if(!empty($user_id)){
+                if ($user_id['id'] === $review['user_id']){
+                    $review_make = 0;
+                    $review_del = 1;
+                    $review_edit = 1;
+                } elseif ($user_id['id'] !== $review['user_id']){
+                    $review_make = 1;
+                } elseif ($user_id['auth'] === "manage") {
+                    $review_make = 0;
+                    $review_del = 1;
+                    $review_edit = 0;
+                } 
             }
+        } else {
+            if(!empty($user_id)){
+                if ($user_id['auth'] === "common") {
+                    $review_make = 1;
+                } 
+            }            
         }
+
         $count = -1;
-        return view('detail', compact('shop','count','review','user_review','review_del','review_edit'));
+        return view('detail', compact('user_id','shop','count','review','review_make','review_del','review_edit'));
     }
 
     public function review_edit(Request $request){

@@ -111,11 +111,30 @@
 }
 
 @media screen and (max-width: 768px) {
-    .review-title {
-        font-size: 30px;
+    .review_main {
+        font-size: 20px;
+        margin: 0px 30px;
     }
 
-    .review-main {
-        font-size: 20px;
+    .review_left {
+        width: 45%;
+        margin-right: 10px;
+    }
+
+    .review_left-title {
+        font-size: 35px;
+    }
+
+    .review_left-item {
+        width: 90%;
+        margin-left: 5px;
+    }
+
+    .detail__comment {
+        width: 50%;
+    }
+
+    .detail__comment-edit {
+        width: 80%;
     }
 }

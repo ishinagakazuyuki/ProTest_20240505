@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
@@ -74,7 +72,6 @@ class ManageController extends Controller
                     unlink($tempPath);
                     $areas_id = area::where('area','=',$row[1])->first();
                     $genres_id = genre::where('genre','=',$row[2])->first();
-                    // dd($areas_id['id'],$genres_id['id']);
                     shop::create([
                         'name' => $row[0],
                         'areas_id' => $areas_id['id'],

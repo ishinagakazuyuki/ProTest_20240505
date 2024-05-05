@@ -153,4 +153,32 @@ class ReviewController extends Controller
         $review = review::where('shops_id','=',$request['shop_id'])->where('user_id','=',$users['id'])->first();
         return view('reviewedit', compact('shop','favorite','review'));
     }
+
+    public function review_all(Request $request){
+        $users = Auth::user();
+        $shop = shop::get();
+        $areadata = area::get();
+        $genredata = genre::get();
+        foreach ($shop as $shops){
+            foreach($areadata as $areadatas){
+                if($shops['areas_id'] === $areadatas['id']){
+                    $shops['areas_id'] = $areadatas['area'];
+                }
+            }
+            foreach($genredata as $genredatas){
+                if($shops['genres_id'] === $genredatas['id']){
+                    $shops['genres_id'] = $genredatas['genre'];
+                }
+            }
+        }
+        $shop = $shop->where('id','=',$request['id'])->first();
+        if(!empty($user_id)){
+            $favorite = favorite::where('user_id','=',$users['id'])->where('shops_id','=',$request['id'])->first();
+        } else {
+            $favorite = null;
+        }
+
+        $review = review::where('shops_id','=',$request['id'])->orderBy('shops_id', 'desc')->get();
+        return view('reviewall', compact('users','shop','favorite','review'));
+    }
 }

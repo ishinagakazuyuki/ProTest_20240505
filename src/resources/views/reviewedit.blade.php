@@ -57,16 +57,13 @@
                 <span class="review-form_label">体験を再評価してください</span>
                 <div id="review_star-rating" class="review_star-rating">
                     <i class="far fa-star" data-rating="1" name="shop_review" value="1"></i>
-                    <input type="hidden" name="shop_review" value="1">
                     <i class="far fa-star" data-rating="2" name="shop_review" value="2"></i>
-                    <input type="hidden" name="shop_review" value="2">
                     <i class="far fa-star" data-rating="3" name="shop_review" value="3"></i>
-                    <input type="hidden" name="shop_review" value="3">
                     <i class="far fa-star" data-rating="4" name="shop_review" value="4"></i>
-                    <input type="hidden" name="shop_review" value="4">
                     <i class="far fa-star" data-rating="5" name="shop_review" value="5"></i>
-                    <input type="hidden" name="shop_review" value="5">
+                    <input type="hidden" name="shop_review" value="">
                 </div>
+                <span class="todo__alert">{{$errors->first('shop_review')}}</span>
             </div>
             <div class="review_right-comment">
                 <span class="review-form_label">口コミを投稿</span><br>
@@ -74,6 +71,7 @@
                 <div class="charCount">
                     <div id="charCount">0/400（最高文字数）</div>
                 </div>
+                <span class="todo__alert">{{$errors->first('comment')}}</span>
             </div>
             <div class="review_right-image">
                 <span class="review-form_label">画像の追加</span>
@@ -83,7 +81,7 @@
                         <span class="drop-text">クリックして追加<br><span>またはドラッグアンドドロップ</span></span>
                     </label>
                 </div>
-                <span class="error">{{$errors->first('image')}}</span>
+                <span class="todo__alert">{{$errors->first('image')}}</span>
             </div>
     </div>
 </div>

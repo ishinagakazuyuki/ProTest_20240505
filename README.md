@@ -45,33 +45,21 @@
 
 ①クローン先のディレクトリに移動後、以下のコマンドを実行してください。<br>
 ◇初期設定<br>
-   git clone git@github.com:ishinagakazuyuki/Rese_Develop.git<br>
-   cd Rese_Develop<br>
+   git clone git@github.com:ishinagakazuyuki/ProTest_20240505.git<br>
+   cd ProTest_20240505<br>
    docker-compose up -d --build<br>
    docker-compose exec php bash<br>
-   apt-get update<br>
-   apt-get install libgd-dev<br>
-   docker-php-ext-install gd<br>
    composer install<br>
+   composer -V<br>
    cp .env.example .env<br>
-   <br>
-◇imagickインストール<br>
-   apt-get update<br>
-   apt-get install imagemagick libmagickwand-dev<br>
-   pecl download imagick<br>
-   tar -xvzf imagick-3.7.0.tgz<br>
-   cd imagick-3.7.0<br>
-   phpize<br>
-   ./configure<br>
-   make<br>
-   make install<br>
-   echo extension=imagick >> /usr/local/etc/php/php.ini<br>
+   composer require stripe/stripe-php<br>
+   php artisan key:generate<br>
+   php artisan storage:link<br>
    exit<br>
+   sudo chmod -R 777 *<br>
    <br>
 ②.envファイルを以下の通りに修正してください。<br>
 ◇修正<br>
-   APP_KEY=base64:BAj4pL5V23zX6lP08LVux0pfO7/H01CKtjoGhCzrtaU=<br>
-   <br>
    DB_HOST=mysql<br>
    DB_DATABASE=laravel_db<br>
    DB_USERNAME=laravel_user<br>
@@ -80,15 +68,43 @@
    MAIL_FROM_ADDRESS=hello@example.com<br>
    <br>
 ◇追加<br>
-   STRIPE_KEY="pk_test_51OIxl4IvhPYinHV09qPDHTXQ21jNeHCNoAuaVEbVQcaFH7auzpezaD2n469QfxrUfdheHJ0XkgLpM7fqsiu4mcwa00P7zLVu7Q"<br>
-   STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV0A9h8mw1MqJL7zklZOOya70C9f82x9vfXWTTmuhGBFUgKFok0ydFqT2rqTRCA6yE29zy0RBmC00NquRxzFu" <br>
+   STRIPE_KEY="pk_test_51OIxl4IvhPYinHV0oio7tzICY0iGzWe2KNnXgu4Ss6RhyBvr20bhqRsg27hvSYZxM6IvJJsjrn4jo8Ln0PiPPF42007MtXePQG"<br>
+   STRIPE_SECRET="sk_test_51OIxl4IvhPYinHV083T4Rcf6DaT7ZhB1bqiXoG5ao2SEaHZX2RDQGBk2lctaJy3sJBFAXjV60nUgFTEEr5Gw5iT500WIYGmmES"<br>
    <br>
-③会員登録をしてください。<br>
-◇ダミーデータの登録<br>
+③テーブルのリフレッシュと店舗・ジャンル・地域データの追加<br>
+   cd ProTest_20240505<br>
    docker-compose exec php bash<br>
+   php artisan migrate:fresh<br>
    php artisan db:seed<br>
    exit<br>
    <br>
-◇会員登録<br>
-   http://localhost/register にアクセスして、必要事項を入力し登録する。<br>
-   会員認証メールが送信されるので、http://localhost:8025/# にアクセスして認証する。<br>
+④画像ファイルの配置<br>
+   cd ProTest_20240505<br>
+   mkdir src/storage/app/public/images<br>
+   sudo chmod -R 777 src/storage/app/public/images<br>
+   <br>
+   ProTest_20240505 ディレクトリに存在する「imageset.zip」を解凍し、<br>
+   その中にある以下の画像ファイルを src/storage/app/public/images に格納してください。<br>
+   ・イタリアン.jpg<br>
+   ・ラーメン.jpg<br>
+   ・寿司.jpg<br>
+   ・居酒屋.jpg<br>
+   ・焼肉.jpg<br>
+   ・key.png<br>
+   ・mail.png<br>
+   ・user.png<br>
+   <br>
+⑤サイトへのアクセス<br>
+   ログインURL：http://localhost/login<br>
+   管理者：manage@example.com<br>
+   パスワード：password123<br>
+   一般ユーザー：common@example.com<br>
+   パスワード：password123<br>
+   <br>
+⑥管理者用画面（CSVインサート用）<br>
+   URL：http://localhost/manage<br>
+   <br>
+⑥インサート用CSVファイルの内容<br>
+   店舗名,地域,ジャンル,店舗情報,画像のURL<br>
+   （例）<br>
+   天下無双,東京都,ラーメン,日本全国どのラーメン屋よりもうまいラーメンを提供しています。その味は正に天下無双です。,https://cdn.pixabay.com/photo/2017/04/04/00/36/ramen-2199962_1280.jpg<br>

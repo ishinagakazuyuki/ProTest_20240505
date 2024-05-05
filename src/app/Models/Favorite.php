@@ -12,7 +12,6 @@ class favorite extends Model
     protected $fillable = [
         'user_id',
         'shops_id',
-        'fav_flg',
     ];
 
     public function scopeTextSearch($query, $text)

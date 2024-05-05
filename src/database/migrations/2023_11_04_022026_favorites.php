@@ -17,7 +17,6 @@ class Favorites extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('shops_id')->constrained()->cascadeOnDelete();
-            $table->string('fav_flg', 255);
             $table->timestamps();
         });
     }

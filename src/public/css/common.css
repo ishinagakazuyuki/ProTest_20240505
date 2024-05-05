@@ -185,14 +185,6 @@
     margin-left: 40px;
 }
 
-.todo__alert {
-    width: 100%;
-    display: block;
-    color: greenyellow;
-    font-size: 20px;
-    margin-left: 40px;
-}
-
 @media screen and (max-width: 768px) {
     .header__logo {
         font-size: 30px;

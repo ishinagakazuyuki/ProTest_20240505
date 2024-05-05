@@ -81,8 +81,9 @@ class ShopController extends Controller
         } else {
             $favorite = null;
         }
+        $sort = "";
         $fav_access = '';
-        return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
+        return view('index', compact('user_id','shop','favorite','sort','area','genre','fav_access'));
     }
 
     public function detail(Request $request){
@@ -106,14 +107,14 @@ class ShopController extends Controller
                     $review_make = 0;
                     $review_del = 1;
                     $review_edit = 0;
-                } 
+                }
             }
         } else {
             if(!empty($user_id)){
                 if ($user_id['auth'] === "common") {
                     $review_make = 1;
-                } 
-            }            
+                }
+            }
         }
 
         $count = -1;
@@ -191,7 +192,6 @@ class ShopController extends Controller
         } else {
             $favorite = null;
         }
-        
         $area = "";
         $genre = "";
         $fav_access = '';

@@ -69,7 +69,7 @@ class ReviewController extends Controller
     }
 
     public function review_delete(Request $request){
-        review::where('id','=',$request['user_review_id'])->delete();
+        review::where('id','=',$request['id'])->delete();
 
         $user_id = Auth::user();
         $shop = shop::join('areas','shops.areas_id','areas.id')->join('genres','shops.genres_id','genres.id')

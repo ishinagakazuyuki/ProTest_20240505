@@ -18,7 +18,7 @@ class FavoriteController extends Controller
             favorite::create([
                 'user_id' => $request['user_id'],
                 'shops_id' => $request['id'],
-            ]);            
+            ]);
         } else {
             $favo_check->delete();
         }
@@ -39,10 +39,11 @@ class FavoriteController extends Controller
             }
         }
         $favorite = favorite::where('user_id','=',$user_id['id'])->get();
+        $sort = "";
         $area = "";
         $genre = "";
         $fav_access = '';
-        return view('index', compact('user_id','shop','favorite','area','genre','fav_access'));
+        return view('index', compact('user_id','shop','favorite','sort','area','genre','fav_access'));
     }
 
     public function favo_change_mypage(Request $request){

@@ -20,7 +20,7 @@ class Shops extends Migration
             $table->foreignId('genres_id')->constrained()->cascadeOnDelete();
             $table->string('overview', 255);
             $table->timestamps();
-            $table->string('review_image')->nullable();
+            $table->string('image')->nullable();
         });
     }
 

@@ -12,7 +12,7 @@ class shop extends Model
     protected $fillable = [
         'name',
         'email',
-        'area',
+        'areas_id',
         'genres_id',
         'overview',
         'image',

@@ -51,10 +51,4 @@ Route::prefix('payment')->name('payment.')->group(function () {
 });
 
 Route::get('/manage', [ManageController::class, 'manage'])->middleware('manage.auth');
-Route::post('/create', [ManageController::class, 'create'])->middleware('manage.auth');
-Route::get('/owner', [ManageController::class, 'owner'])->middleware('owner.auth');
-Route::get('/send_mail', [ManageController::class, 'send_mail'])->middleware('owner.auth');
-Route::post('/send_mail', [ManageController::class, 'send_mail'])->middleware('owner.auth');
-Route::get('/update', [ManageController::class, 'update'])->middleware('owner.auth');
-Route::post('/update', [ManageController::class, 'update'])->middleware('owner.auth');
-Route::get('/check/{reserve_id}', [ManageController::class, 'check'])->name('check');
+Route::post('/import', [ManageController::class, 'import']);

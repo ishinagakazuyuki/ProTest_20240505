@@ -3,111 +3,88 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
 use App\Models\User;
 use App\Models\Shop;
-use App\Models\Reservation;
-use App\Models\Owner;
-use App\Http\Requests\CreateRequest;
+use App\Models\Area;
+use App\Models\Genre;
 
 class ManageController extends Controller
 {
-public function manage(Request $request){
-        $favorite = 2;
-        return view('manage', compact('favorite'));
-    }
-
-    public function create(CreateRequest $request){
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'auth' => 'owner'
-        ]);
-        $user = user::where('name','=',$request['name'])->first();
-        $user->sendEmailVerificationNotification();
+    public function manage(Request $request){
         return view('manage');
     }
 
-    public function owner(Request $request){
-        $user_id = Auth::user();
-        $favorite = 2;
-        $shop = owner::join('shops','owners.shops_id','shops.id')->where('user_id','=',$user_id['id'])->first();
-        if(empty($shop)){
-            $shop = [
-                'id' => null,
-                'name' => '店名を入力してください',
-                'area' => '都道府県',
-                'genre' => 'ジャンル',
-                'overview' => '店の説明を入力してください',
+    public function import(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt',
+        ]);
+
+        $csvData = array_map('str_getcsv', explode("\n", $request->file('csv_file')->get()));
+        foreach ($csvData as $index => $row) {
+            $messages = [
+                '0.required' => '店舗名は必須です。',
+                '0.string' => '店舗名は文字列で入力してください。',
+                '0.max' => '店舗名は50文字以内で入力してください。',
+                '1.required' => '地域名は必須です。',
+                '1.in' => '地域名は東京都、大阪府、福岡県のいずれかを指定してください。',
+                '2.required' => 'ジャンル名は必須です。',
+                '2.in' => 'ジャンル名は寿司、焼肉、イタリアン、居酒屋、ラーメンのいずれかを指定してください。',
+                '3.required' => '店舗の説明は必須です。',
+                '3.string' => '店舗の説明は文字列で入力してください。',
+                '3.max' => '店舗の説明は400文字以内で入力してください。',
+                '4.required' => '店舗のイメージ画像は必須です。',
             ];
-            $reserve = null;
-        }else{
-            $reserve = reservation::join('shops','reservations.shops_id','shops.id')->where('shops_id','=',$shop['shops_id'])->get();
-        }
-        $user = user::get();
-        return view('shopowner', compact('shop','favorite','reserve','user'));
-    }
 
-    public function update(Request $request){
-        $user_id = Auth::user();
-        $favorite = 2;
-        if(empty($request['id'])){
-            shop::create([
-                'name' => $request['name'],
-                'area' => $request['area'],
-                'genre' => $request['genre'],
-                'overview' => $request['overview'],
-            ]);
-            $shop_id = shop::where('name','=',$request['name'])->first();
-            owner::create([
-                'user_id' => $user_id['id'],
-                'shops_id' => $shop_id['id'],
-            ]);
-        }else{
-            shop::where('id','=',$request['id'])->first()->update([
-                'name' => $request['name'],
-                'area' => $request['area'],
-                'genre' => $request['genre'],
-                'overview' => $request['overview'],
-            ]);
-        }
-        if(!empty($request['img'])){
-            $img_name = $request['name'].".jpg";
-            $request->file('img')->storeAs('public/images', $img_name);
-        }
-        $shop = owner::join('shops','owners.shops_id','shops.id')->where('user_id','=',$user_id['id'])->first();
-        $reserve = reservation::join('shops','reservations.shops_id','shops.id')->where('shops_id','=',$shop['shops_id'])->get();
-        $user = user::get();
-        return view('shopowner', compact('shop','favorite','reserve','user'));
-    }
+            $validator = Validator::make($row, [
+                '0' => 'required|string|max:50',
+                '1' => 'required|in:東京都,大阪府,福岡県',
+                '2' => 'required|in:寿司,焼肉,イタリアン,居酒屋,ラーメン',
+                '3' => 'required|string|max:400',
+                '4' => 'required',
+            ], $messages);
 
-    public function send_mail(Request $request){
-        $to = user::where('name','=',$request['user_name'])->first();
-        $to = $to['email'];
-        $name = $request['user_name'];
-        $shop = $request['reserve_name'];
-        $date = $request['reserve_date'];
-        $time = $request['reserve_time'];
-        $number = $request['reserve_number'];
-        Mail::to($to)->send(new SendMail($name,$shop,$date,$time,$number));
-        $user_id = Auth::user();
-        $favorite = 2;
-        $shop = owner::join('shops','owners.shops_id','shops.id')->where('user_id','=',$user_id['id'])->first();
-        $reserve = reservation::join('shops','reservations.shops_id','shops.id')->where('shops_id','=',$shop['shops_id'])->get();
-        $user = user::get();
-        return view('shopowner', compact('shop','favorite','reserve','user'));
-    }
-
-    public function check(Request $request){
-        $favorite = 1;
-        $user = user::join('reservations','users.id','reservations.user_id')->where('reservations.id','=',$request['id'])->first();
-        $shop = shop::join('reservations','shops.id','reservations.shops_id')->where('reservations.id','=',$request['id'])->first();
-        return view('check', compact('favorite','user','shop'));
+            if ($validator->fails()) {
+                Session::flash('error', $validator->errors()->toArray());
+                return redirect()->back();
+            } else {
+                $tempPath = tempnam(sys_get_temp_dir(), 'img');
+                file_put_contents($tempPath, file_get_contents($row[4]));
+                $check = new UploadedFile(
+                    $tempPath,
+                    basename($tempPath),
+                    mime_content_type($tempPath), 
+                    null,
+                    true
+                );
+                $validator = Validator::make(['image' => $check], [
+                    'image' => 'image|mimes:jpg,jpeg,png',
+                ]);
+                if ($validator->fails()) {
+                    Session::flash('error', $validator->errors()->toArray());
+                    return redirect()->back();
+                } else {
+                    $path = Storage::putFile('public/images', $tempPath);
+                    $filename = basename($path);
+                    unlink($tempPath);
+                    $areas_id = area::where('area','=',$row[1])->first();
+                    $genres_id = genre::where('genre','=',$row[2])->first();
+                    // dd($areas_id['id'],$genres_id['id']);
+                    shop::create([
+                        'name' => $row[0],
+                        'areas_id' => $areas_id['id'],
+                        'genres_id' => $genres_id['id'],
+                        'overview' => $row[3],
+                        'image' => $filename,
+                    ]);
+                }
+            }
+        }
+    return redirect()->back()->with('success', 'CSVファイルのインポートが完了しました。');
     }
 }

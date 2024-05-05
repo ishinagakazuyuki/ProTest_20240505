@@ -10,26 +10,28 @@
         <span>管理画面</span>
     </div>
         <div class="login__content">
-        <form class="login-form" action="/create" method="post">
+        <form action="/import" method="post" enctype="multipart/form-data">
         @csrf
-            <div class="login-form__item">
-                <img class="login-form_img" src="storage/images/user.png" alt="" />
-                <input class="login-form__input" type="text" name="name" placeholder="Username" value="{{ old('name') }}"  >
-            </div>
-            <div class="login-form__item">
-                <img class="login-form_img" src="storage/images/mail.png" alt="" />
-                <input class="login-form__input" type="text" name="email" placeholder="Email" value="{{ old('email') }}" >
-            </div>
-            <div class="login-form__item">
-                <img class="login-form_img" src="storage/images/key.png" alt="" />
-                <input class="login-form__input" type="password" name="password" placeholder="Password" >
-            </div>
-            <div class="login-form__button">
-                <button class="login-form__button-submit" type="submit">登録</button>
-                <input id="name" type="hidden" name="company_register" value=2 >
-                <input id="name" type="hidden" name="manage_flg" value='owner' >
-            </div>
+            <input type="file" name="csv_file">
+            <button type="submit">インポート</button>
+            <span class="todo__alert">{{$errors->first('csv_file')}}</span>
         </form>
     </div>
+    @if(Session::has('error'))
+    <div class="todo__alert">
+        <ul>
+            @foreach(Session::get('error') as $error)
+                @foreach($error as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="alert alert-danger">
+        {{ session('success') }}
+    </div>
+    @endif
 </div>
 @endsection

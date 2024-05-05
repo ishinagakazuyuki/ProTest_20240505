@@ -2,7 +2,7 @@
 
 - ある企業のグループ会社の飲食店予約サービス。
 
-![toppage](https://github.com/ishinagakazuyuki/Rese_Develop/assets/135584828/bed870d9-50dc-4c52-81ed-94b2d7905e70)
+![Rese_Top_20240505](https://github.com/ishinagakazuyuki/Free_Market/assets/135584828/b5eeca81-4126-4587-988d-53aa15ed0546)
 
 ## 作成した目的
 
@@ -23,6 +23,7 @@
 - リマインダー送信（午前9:00にメール自動送信）
 - 店舗代表者用ページ（店舗情報設定・修正、予約情報メール送信）
 - 管理者用ページ（店舗代表者登録）
+- 店舗情報インサート機能（管理者のみ）
 
 ## 使用技術(実行環境)
 
